@@ -33,6 +33,7 @@ class LoginScreen extends React.Component {
   };
 
   render() {
+    const { screenProps } = this.props;
     return (
       <Fragment>
         <Header_Login title="Login" />
@@ -42,8 +43,9 @@ class LoginScreen extends React.Component {
             titleStyle={{ fontWeight: '700' }}
             buttonStyle={{
               backgroundColor: '#3D6DCC',
-              width: 300,
-              height: 45,
+              width: screenProps.width,
+              minHeight: 45,
+              height: screenProps.height / 100 * 7,
               borderColor: 'transparent',
               borderWidth: 0,
               borderRadius: 0,
@@ -66,18 +68,17 @@ class SettingsScreen extends React.Component {
   }
 }
 
-export default ({ width }) =>
-  DrawerNavigator(
-    {
-      Home: {
-        screen: HomeScreen,
-      },
-      Settings: {
-        screen: SettingsScreen,
-      },
-      LogOut: {
-        screen: LoginScreen,
-      },
+export default DrawerNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
     },
-    { drawerWidth: width / 100 * 65 }
-  );
+    Settings: {
+      screen: SettingsScreen,
+    },
+    LogOut: {
+      screen: LoginScreen,
+    },
+  },
+  { initialRouteName: 'LogOut' }
+);

@@ -23,7 +23,7 @@ class AppContainer extends React.Component {
   }
 
   render() {
-    return React.createElement(App(this.state), {});
+    return <App screenProps={this.state} />;
   }
 }
 
