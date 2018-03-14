@@ -1,22 +1,9 @@
 import React, { Fragment } from 'react';
-import { Platform, StyleSheet, View, Dimensions } from 'react-native';
+import { Platform, StyleSheet, View, Text, Dimensions } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
-import { Button } from 'react-native-elements';
+import { Button, ButtonGroup } from 'react-native-elements';
 import Header from './components/Header';
 import Header_Login from './components/Header_Login';
-
-const varClassList = [
-  ['5A', '5B', '5C', '5D'],
-  ['6A', '6B', '6C', '6D'],
-  ['7A', '7B', '7C', '7D'],
-  ['8A', '8B', '8C', '8D'],
-  ['8A', '8B', '8C', '8D'],
-  ['9A', '9B', '9C', '9D'],
-  ['EF'],
-  ['Q1'],
-  ['Q2'],
-];
-const varClass = varClassList[0][0];
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -24,35 +11,70 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    return <Header title={`Vertretungen - ${varClass}`} navigation={this.props.navigation} />;
+    const { screenProps: { grades, selectedGrade: { level, index } } } = this.props;
+    const { name } = grades[level][index];
+    return <Header title={`Vertretungen - ${name}`} navigation={this.props.navigation} />;
   }
 }
+
+const GradeSelectButton = ({ title, onPress }) => (
+  <Button
+    onPress={onPress}
+    title={title}
+    buttonStyle={{
+      width: 100,
+    }}
+  />
+);
+
 class LoginScreen extends React.Component {
   static navigationOptions = {
     drawerLabel: 'Log Out',
   };
 
   render() {
-    const { screenProps } = this.props;
+    const { screenProps: { grades, width, height, setActiveGrade, selectedGrade } } = this.props;
     return (
       <Fragment>
         <Header_Login title="Login" />
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}>
-          <Button
-            title="LOG IN"
-            titleStyle={{ fontWeight: '700' }}
-            buttonStyle={{
-              backgroundColor: '#3D6DCC',
-              width: screenProps.width,
-              minHeight: 45,
-              height: screenProps.height / 100 * 7,
-              borderColor: 'transparent',
-              borderWidth: 0,
-              borderRadius: 0,
+        <View style={{ flex: 1 }}>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
-            containerStyle={{ marginTop: 20 }}
-            onPress={() => this.props.navigation.navigate('Home')}
-          />
+          >
+            <View style={{ width: width * 0.5 }}>
+              {Object.entries(grades).map(([level, gradesInLevel]) => (
+                <ButtonGroup
+                  selectedIndex={level === selectedGrade.level ? selectedGrade.index : undefined}
+                  onPress={index => setActiveGrade(level, index)}
+                  key={level}
+                  buttons={gradesInLevel.map(({ name }) => name)}
+                  selectedButtonStyle={{ backgroundColor: '#3D6DCC' }}
+                  selectedTextStyle={{ color: 'white' }}
+                />
+              ))}
+            </View>
+          </View>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <Button
+              title="LOG IN"
+              titleStyle={{ fontWeight: '700' }}
+              buttonStyle={{
+                backgroundColor: '#3D6DCC',
+                width,
+                minHeight: 45,
+                height: height / 100 * 7,
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 0,
+              }}
+              containerStyle={{ marginTop: 20 }}
+              onPress={() => this.props.navigation.navigate('Home')}
+            />
+          </View>
         </View>
       </Fragment>
     );
