@@ -1,7 +1,7 @@
 import React from 'react';
-import { Platform, StyleSheet, View, Dimensions, TouchableHighlight } from 'react-native';
-import { Header, Icon } from 'react-native-elements';
+import { Platform, StyleSheet, View, Dimensions } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
+import Header from './components/Header';
 
 const varClassList = [
   ['5A', '5B', '5C', '5D'],
@@ -16,36 +16,13 @@ const varClassList = [
 ];
 const varClass = varClassList[0][0];
 
-const SettingsButton = props => (
-  <View>
-    <Icon name={props.icon} color={props.color} />
-  </View>
-);
-
-const MenuButton = props => (
-  <TouchableHighlight onPress={() => props.navigation.navigate('DrawerOpen')}>
-    <View>
-      <Icon name={props.icon} color={props.color} />
-    </View>
-  </TouchableHighlight>
-);
-
 class HomeScreen extends React.Component {
   static navigationOptions = {
     drawerLabel: 'Home',
   };
 
   render() {
-    return (
-      <Header
-        leftComponent={<MenuButton navigation={this.props.navigation} icon="menu" color="white" />}
-        centerComponent={{
-          text: `Vertretungen - ${varClass}`,
-          style: { color: '#fff' },
-        }}
-        rightComponent={<SettingsButton icon="settings" color="white" />}
-      />
-    );
+    return <Header title={`Vertretungen - ${varClass}`} navigation={this.props.navigation} />;
   }
 }
 
@@ -54,16 +31,7 @@ class SettingsScreen extends React.Component {
     drawerLabel: 'Einstellungen',
   };
   render() {
-    return (
-      <Header
-        leftComponent={<MenuButton navigation={this.props.navigation} icon="menu" color="white" />}
-        centerComponent={{
-          text: 'Einstellungen',
-          style: { color: '#fff' },
-        }}
-        rightComponent={<SettingsButton icon="settings" color="white" />}
-      />
-    );
+    return <Header title="Einstellungen" navigation={this.props.navigation} />;
   }
 }
 
