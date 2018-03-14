@@ -17,6 +17,12 @@ const varClassList = [
 const varClass = varClassList[0][0];
 
 const SettingsButton = props => (
+  <View>
+    <Icon name={props.icon} color={props.color} />
+  </View>
+);
+
+const MenuButton = props => (
   <TouchableHighlight onPress={() => props.navigation.navigate('DrawerOpen')}>
     <View>
       <Icon name={props.icon} color={props.color} />
@@ -24,28 +30,20 @@ const SettingsButton = props => (
   </TouchableHighlight>
 );
 
-const MenuButton = props => (
-  <View>
-    <Icon name={props.icon} color={props.color} />
-  </View>
-);
-
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Back',
+    drawerLabel: 'Home',
   };
 
   render() {
     return (
       <Header
-        leftComponent={<MenuButton icon="menu" color="white" />}
+        leftComponent={<MenuButton navigation={this.props.navigation} icon="menu" color="white" />}
         centerComponent={{
           text: `Vertretungen - ${varClass}`,
           style: { color: '#fff' },
         }}
-        rightComponent={
-          <SettingsButton navigation={this.props.navigation} icon="settings" color="white" />
-        }
+        rightComponent={<SettingsButton icon="settings" color="white" />}
       />
     );
   }
@@ -53,19 +51,17 @@ class HomeScreen extends React.Component {
 
 class SettingsScreen extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Settings',
+    drawerLabel: 'Einstellungen',
   };
   render() {
     return (
       <Header
-        leftComponent={<MenuButton icon="menu" color="white" />}
+        leftComponent={<MenuButton navigation={this.props.navigation} icon="menu" color="white" />}
         centerComponent={{
-          text: `Vertretungen - ${varClass}`,
+          text: 'Einstellungen',
           style: { color: '#fff' },
         }}
-        rightComponent={
-          <SettingsButton navigation={this.props.navigation} icon="settings" color="white" />
-        }
+        rightComponent={<SettingsButton icon="settings" color="white" />}
       />
     );
   }
