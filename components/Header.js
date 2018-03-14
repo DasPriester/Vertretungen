@@ -4,6 +4,7 @@ import { Icon, Header } from 'react-native-elements';
 
 const cHeader = props => (
   <Header
+    outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
     leftComponent={<MenuButton navigation={props.navigation} icon="menu" color="white" />}
     centerComponent={{
       text: props.title,

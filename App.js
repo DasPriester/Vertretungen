@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Platform, StyleSheet, View, Dimensions } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
+import { Button } from 'react-native-elements';
 import Header from './components/Header';
+import Header_Login from './components/Header_Login';
 
 const varClassList = [
   ['5A', '5B', '5C', '5D'],
@@ -25,6 +27,35 @@ class HomeScreen extends React.Component {
     return <Header title={`Vertretungen - ${varClass}`} navigation={this.props.navigation} />;
   }
 }
+class LoginScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Log Out',
+  };
+
+  render() {
+    return (
+      <Fragment>
+        <Header_Login title="Login" />
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}>
+          <Button
+            title="LOG IN"
+            titleStyle={{ fontWeight: '700' }}
+            buttonStyle={{
+              backgroundColor: '#3D6DCC',
+              width: 300,
+              height: 45,
+              borderColor: 'transparent',
+              borderWidth: 0,
+              borderRadius: 0,
+            }}
+            containerStyle={{ marginTop: 20 }}
+            onPress={() => this.props.navigation.navigate('Home')}
+          />
+        </View>
+      </Fragment>
+    );
+  }
+}
 
 class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -43,6 +74,9 @@ export default ({ width }) =>
       },
       Settings: {
         screen: SettingsScreen,
+      },
+      LogOut: {
+        screen: LoginScreen,
       },
     },
     { drawerWidth: width / 100 * 65 }
