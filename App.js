@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Platform, StyleSheet, View, Text, Dimensions } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
-import { Button, ButtonGroup } from 'react-native-elements';
+import { Button, ButtonGroup, List, ListItem } from 'react-native-elements';
 import Header from './components/Header';
 import Header_Login from './components/Header_Login';
 
@@ -11,9 +11,39 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    const { screenProps: { grades, selectedGrade: { level, index } } } = this.props;
-    const { name } = grades[level][index];
-    return <Header title={`Vertretungen - ${name}`} navigation={this.props.navigation} />;
+    const { screenProps: { grades, selectedGrade: { level, index }, substitutes } } = this.props;
+    const { name: grade } = grades[level][index];
+    const actualSubstitutes = substitutes[grade];
+    return (
+      <Fragment>
+        <Header title={`Vertretungen - ${grade}`} navigation={this.props.navigation} />
+        <View style={{ flex: 1 }}>
+          <List containerStyle={{ marginBottom: 20 }}>
+            {actualSubstitutes.map(({ teacher, lesson, isFree, subject }, index) => (
+              <ListItem
+                containerStyle={{
+                  backgroundColor: isFree ? 'rgb(27, 159, 44)' : undefined,
+                }}
+                titleStyle={{
+                  color: !isFree ? 'orange' : 'black',
+                }}
+                rightTitleStyle={{
+                  color: !isFree ? 'orange' : 'black',
+                }}
+                subtitleStyle={{
+                  color: !isFree ? 'orange' : 'black',
+                }}
+                hideChevron={true}
+                key={index}
+                title={subject}
+                subtitle={teacher}
+                rightTitle={lesson}
+              />
+            ))}
+          </List>
+        </View>
+      </Fragment>
+    );
   }
 }
 

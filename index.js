@@ -3,16 +3,10 @@ import { AppRegistry, Dimensions, View, Text } from 'react-native';
 
 import Loading from './components/Loading';
 import App from './App';
+import { substituteFetcher, gradesFetcher } from './fetchers';
 
 const { width, height } = Dimensions.get('screen');
 const getOrientation = (width, height) => (width > height ? 'landscape' : 'portrait');
-
-const transformGrades = (collection, { id, name }) => {
-  collection[name.charAt(0)]
-    ? collection[name.charAt(0)].push({ id, name })
-    : (collection[name.charAt(0)] = [{ id, name }]);
-  return collection;
-};
 
 class AppContainer extends React.Component {
   state = {
@@ -20,21 +14,15 @@ class AppContainer extends React.Component {
     selectedGrade: { level: null, index: null },
     isLoading: true,
     grades: {},
+    substitutes: {},
     width,
     height,
   };
 
   componentWillMount() {
-    fetch(
-      'http://joomla35.hardtberg-gymnasium.de/neu/components/com_school_mobile/wserv/service.php?user=mustermann&pw&task=getUpdates'
-    )
-      .then(response => response.json())
-      .then(({ klassenjgst }) =>
-        this.setState({
-          isLoading: false,
-          grades: klassenjgst.reduce(transformGrades, {}),
-        })
-      );
+    Promise.all([gradesFetcher(), substituteFetcher()]).then(([grades, substitutes]) =>
+      this.setState({ isLoading: false, grades, substitutes })
+    );
 
     Dimensions.addEventListener('change', ({ screen }) =>
       this.setState({
