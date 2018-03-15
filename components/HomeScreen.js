@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem, Button } from 'react-native-elements';
 
 import Header from './Header';
 
@@ -10,7 +10,9 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
-    const { screenProps: { grades, selectedGrade: { level, index }, substitutes } } = this.props;
+    const {
+      screenProps: { grades, selectedGrade: { level, index }, substitutes, setActiveGrade },
+    } = this.props;
     const { name: grade } = grades[level][index];
     const actualSubstitutes = substitutes[grade];
     return (
@@ -46,10 +48,26 @@ export default class HomeScreen extends React.Component {
                 })}
               </List>
             ) : (
-              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 100, marginBottom: 20 }}>😭</Text>
-                <Text>Keine Vertretungen für die {grade}</Text>
-              </View>
+              <Fragment>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontSize: 100, marginBottom: 20 }}>😭</Text>
+                  <Text>Keine Vertretungen für die {grade}</Text>
+                </View>
+                <View style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: 50 }}>
+                  <Button
+                    buttonStyle={{
+                      backgroundColor: '#456FC6',
+                      width: 300,
+                      height: 45,
+                      borderColor: 'transparent',
+                      borderWidth: 0,
+                      borderRadius: 5,
+                    }}
+                    title="Zurück"
+                    onPress={() => setActiveGrade()}
+                  />
+                </View>
+              </Fragment>
             )}
           </View>
         </ScrollView>
