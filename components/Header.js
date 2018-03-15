@@ -2,17 +2,6 @@ import React from 'react';
 import { View, TouchableHighlight } from 'react-native';
 import { Icon, Header } from 'react-native-elements';
 
-const cHeader = props => (
-  <Header
-    outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
-    leftComponent={<MenuButton navigation={props.navigation} icon="menu" color="white" />}
-    centerComponent={{
-      text: props.title,
-      style: { color: '#fff' },
-    }}
-    rightComponent={<SettingsButton icon="settings" color="white" />}
-  />
-);
 const SettingsButton = props => (
   <View>
     <Icon name={props.icon} color={props.color} />
@@ -27,4 +16,23 @@ const MenuButton = props => (
   </TouchableHighlight>
 );
 
-export default cHeader;
+export default ({ navigation, title, hideButtons }) =>
+  hideButtons ? (
+    <Header
+      outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
+      centerComponent={{
+        text: title,
+        style: { color: '#fff' },
+      }}
+    />
+  ) : (
+    <Header
+      outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
+      leftComponent={<MenuButton navigation={navigation} icon="menu" color="white" />}
+      centerComponent={{
+        text: title,
+        style: { color: '#fff' },
+      }}
+      rightComponent={<SettingsButton icon="settings" color="white" />}
+    />
+  );
