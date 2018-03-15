@@ -2,12 +2,6 @@ import React from 'react';
 import { View, TouchableHighlight } from 'react-native';
 import { Icon, Header } from 'react-native-elements';
 
-const SettingsButton = props => (
-  <View>
-    <Icon name={props.icon} color={props.color} />
-  </View>
-);
-
 const MenuButton = props => (
   <TouchableHighlight onPress={() => props.navigation.navigate('DrawerOpen')}>
     <View>
@@ -33,6 +27,5 @@ export default ({ navigation, title, hideButtons }) =>
         text: title,
         style: { color: '#fff' },
       }}
-      rightComponent={<SettingsButton icon="settings" color="white" />}
     />
   );
