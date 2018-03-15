@@ -19,6 +19,9 @@ const CustomDrawerContentComponent = ({ items, ...props }) => {
         <DrawerItems
           {...props}
           items={logoutItem}
+          labelStyle={{
+            color: 'red',
+          }}
           onItemPress={route => props.screenProps.setActiveGrade()}
         />
       </SafeAreaView>
