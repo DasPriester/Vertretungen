@@ -1,22 +1,32 @@
 import React, { Fragment } from 'react';
-import { Platform, StyleSheet, View, Text, Dimensions } from 'react-native';
-import { DrawerNavigator } from 'react-navigation';
+import { ScrollView, View, Text } from 'react-native';
+import { DrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
 
 import HomeScreen from './components/HomeScreen';
 import LoginScreen from './components/LoginScreen';
 import SettingsScreen from './components/SettingsScreen';
 
-const GradeSelectButton = ({ title, onPress }) => (
-  <Button
-    onPress={onPress}
-    title={title}
-    buttonStyle={{
-      width: 100,
-    }}
-  />
-);
+const CustomDrawerContentComponent = ({ items, ...props }) => {
+  const filteredItems = items.filter(({ key }) => key !== 'LogOut');
+  const logoutItem = items.filter(({ key }) => key === 'LogOut');
 
-export default DrawerNavigator(
+  return (
+    <ScrollView contentContainerStyle={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }} forceInset={{ top: 'always', horizontal: 'never' }}>
+        <View style={{ flex: 1 }}>
+          <DrawerItems items={filteredItems} {...props} />
+        </View>
+        <DrawerItems
+          {...props}
+          items={logoutItem}
+          onItemPress={route => props.screenProps.setActiveGrade()}
+        />
+      </SafeAreaView>
+    </ScrollView>
+  );
+};
+
+const Navigator = DrawerNavigator(
   {
     Home: {
       screen: HomeScreen,
@@ -28,5 +38,11 @@ export default DrawerNavigator(
       screen: LoginScreen,
     },
   },
-  { initialRouteName: 'LogOut' }
+  {
+    initialRouteName: 'Home',
+    contentComponent: CustomDrawerContentComponent,
+  }
 );
+
+export default props =>
+  props.screenProps.selectedGrade.level ? <Navigator {...props} /> : <LoginScreen {...props} />;

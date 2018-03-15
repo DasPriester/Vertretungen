@@ -4,14 +4,16 @@ import { AppRegistry, Dimensions, View, Text } from 'react-native';
 import Loading from './components/Loading';
 import App from './App';
 import { substituteFetcher, gradesFetcher } from './fetchers';
+import Storage from './packages/react-native-key-value-store';
 
+const DEFAULT_SELECTED_GRADE = { level: null, index: null };
 const { width, height } = Dimensions.get('screen');
 const getOrientation = (width, height) => (width > height ? 'landscape' : 'portrait');
 
 class AppContainer extends React.Component {
   state = {
     orientation: getOrientation(width, height),
-    selectedGrade: { level: null, index: null },
+    selectedGrade: DEFAULT_SELECTED_GRADE,
     isLoading: true,
     grades: {},
     substitutes: {},
@@ -20,8 +22,12 @@ class AppContainer extends React.Component {
   };
 
   componentWillMount() {
-    Promise.all([gradesFetcher(), substituteFetcher()]).then(([grades, substitutes]) =>
-      this.setState({ isLoading: false, grades, substitutes })
+    Promise.all([
+      Storage.get('selectedGrade', DEFAULT_SELECTED_GRADE),
+      gradesFetcher(),
+      substituteFetcher(),
+    ]).then(([selectedGrade, grades, substitutes]) =>
+      this.setState({ isLoading: false, grades, substitutes, selectedGrade })
     );
 
     Dimensions.addEventListener('change', ({ screen }) =>
@@ -33,7 +39,8 @@ class AppContainer extends React.Component {
     );
   }
 
-  setActiveGrade = (level, index) => {
+  setActiveGrade = ({ level, index } = DEFAULT_SELECTED_GRADE) => {
+    Storage.set('selectedGrade', { level, index });
     this.setState({ selectedGrade: { level, index } });
   };
 
