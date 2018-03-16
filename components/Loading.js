@@ -1,8 +1,11 @@
 import React from 'react';
-import { ActivityIndicator, View, Text } from 'react-native';
+import { ActivityIndicator, View, Text, ImageBackground, StyleSheet } from 'react-native';
 
 export default () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <ActivityIndicator animating size="large" />
-  </View>
+  <ImageBackground
+    style={{ ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center' }}
+    source={require('../images/splash.png')}
+  >
+    <ActivityIndicator style={{ marginTop: 200 }} animating size="large" color="white" />
+  </ImageBackground>
 );
