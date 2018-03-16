@@ -21,7 +21,8 @@ class AppContainer extends React.Component {
     height,
   };
 
-  componentWillMount() {
+  loadData = () => {
+    this.setState({ isLoading: true });
     Promise.all([
       Storage.get('selectedGrade', DEFAULT_SELECTED_GRADE),
       gradesFetcher(),
@@ -29,6 +30,10 @@ class AppContainer extends React.Component {
     ]).then(([selectedGrade, grades, substitutes]) =>
       this.setState({ isLoading: false, grades, substitutes, selectedGrade })
     );
+  };
+
+  componentWillMount() {
+    this.loadData();
 
     Dimensions.addEventListener('change', ({ screen }) =>
       this.setState({
@@ -49,7 +54,13 @@ class AppContainer extends React.Component {
     return isLoading ? (
       <Loading />
     ) : (
-      <App screenProps={{ ...this.state, setActiveGrade: this.setActiveGrade }} />
+      <App
+        screenProps={{
+          ...this.state,
+          setActiveGrade: this.setActiveGrade,
+          reloadData: this.loadData,
+        }}
+      />
     );
   }
 }
