@@ -28,7 +28,10 @@ export default ({ navigation, title, hideButtons }) =>
     />
   ) : (
     <Header
-      outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
+      outerContainerStyles={{
+        backgroundColor: '#3D6DCC',
+        borderBottomColor: 'grey',
+      }}
       leftComponent={<MenuButton navigation={navigation} icon="menu" color="white" />}
       centerComponent={{
         text: title,
