@@ -42,7 +42,13 @@ export default class HomeScreen extends React.Component {
                       key={index}
                       title={`Fach: ${subject} ${room ? `Raum: ${room}` : ''}`}
                       subtitle={teacher && `Lehrer: ${teacher}`}
-                      rightTitle={lesson}
+                      badge={{
+                        value: lesson,
+                        textStyle: { color: isFree ? '#a5d794' : 'white' },
+                        containerStyle: {
+                          backgroundColor: isFree ? 'rgb(40, 152, 55)' : 'grey',
+                        },
+                      }}
                     />
                   );
                 })}
