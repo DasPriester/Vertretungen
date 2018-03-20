@@ -19,18 +19,24 @@ export default class HomeScreen extends React.Component {
       <Fragment>
         <Header title={`Vertretungen - ${grade}`} navigation={this.props.navigation} />
         <ScrollView contentContainerStyle={{ flex: 1 }}>
-          <List containerStyle={{ marginTop: 0, margin: 0, borderColor: 'grey' }}>
-            <ListItem
-              hideChevron
-              title="Heute"
-              titleStyle={{ color: 'white' }}
-              containerStyle={{
-                backgroundColor: 'grey',
-                borderBottomColor: 'grey',
-                height: 38,
-              }}
-            />
-          </List>
+          {actualSubstitutes ? (
+            <List containerStyle={{ marginTop: 0, margin: 0, borderColor: 'grey' }}>
+              <ListItem
+                hideChevron
+                title="Heute"
+                rightTitle="Stunde"
+                titleStyle={{ color: 'white' }}
+                rightTitleStyle={{ color: 'white' }}
+                containerStyle={{
+                  backgroundColor: 'grey',
+                  borderBottomColor: 'grey',
+                  height: 38,
+                }}
+              />
+            </List>
+          ) : (
+            undefined
+          )}
           <View style={{ flex: 1 }}>
             {actualSubstitutes ? (
               <List containerStyle={{ marginTop: 0, marginBottom: 20, borderColor: 'grey' }}>
