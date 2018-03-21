@@ -20,7 +20,7 @@ export default class HomeScreen extends React.Component {
         <Header title={`Vertretungen - ${grade}`} navigation={this.props.navigation} />
         <ScrollView contentContainerStyle={{ flex: 1 }}>
           {actualSubstitutes ? (
-            <List containerStyle={{ marginTop: 0, margin: 0, borderColor: 'grey' }}>
+            <List containerStyle={{ marginTop: 0, margin: 0, borderColor: 'rgb(180, 180, 180)' }}>
               <ListItem
                 hideChevron
                 title="Heute"
@@ -28,8 +28,8 @@ export default class HomeScreen extends React.Component {
                 titleStyle={{ color: 'white' }}
                 rightTitleStyle={{ color: 'white' }}
                 containerStyle={{
-                  backgroundColor: 'grey',
-                  borderBottomColor: 'grey',
+                  backgroundColor: 'rgb(180, 180, 180)',
+                  borderBottomColor: 'rgb(180, 180, 180)',
                   height: 38,
                 }}
               />
@@ -39,7 +39,13 @@ export default class HomeScreen extends React.Component {
           )}
           <View style={{ flex: 1 }}>
             {actualSubstitutes ? (
-              <List containerStyle={{ marginTop: 0, marginBottom: 20, borderColor: 'grey' }}>
+              <List
+                containerStyle={{
+                  marginTop: 0,
+                  marginBottom: 20,
+                  borderColor: 'rgb(180, 180, 180)',
+                }}
+              >
                 {actualSubstitutes.map(({ teacher, lesson, isFree, subject, room }, index) => {
                   return (
                     <ListItem
@@ -64,7 +70,7 @@ export default class HomeScreen extends React.Component {
                         value: lesson,
                         textStyle: { color: isFree ? '#a5d794' : 'white' },
                         containerStyle: {
-                          backgroundColor: isFree ? 'rgb(40, 152, 55)' : 'grey',
+                          backgroundColor: isFree ? 'rgb(40, 152, 55)' : 'rgb(180, 180, 180)',
                         },
                       }}
                     />
