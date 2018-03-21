@@ -418,8 +418,8 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				E8014AEFB5914CE2A9BB0481 /* libRNVectorIcons.a in Frameworks */,
 				0D7F91AD206179B800665775 /* libRCTPushNotification.a in Frameworks */,
+				E8014AEFB5914CE2A9BB0481 /* libRNVectorIcons.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
