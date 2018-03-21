@@ -5,6 +5,7 @@ import { DrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
 import HomeScreen from './components/HomeScreen';
 import LoginScreen from './components/LoginScreen';
 import SettingsScreen from './components/SettingsScreen';
+import PushControler from './components/PushHandler';
 
 const CustomDrawerContentComponent = ({ items, ...props }) => {
   const filteredItems = items.filter(({ key }) => key !== 'LogOut');
@@ -25,6 +26,7 @@ const CustomDrawerContentComponent = ({ items, ...props }) => {
           onItemPress={route => props.screenProps.setActiveGrade()}
         />
       </SafeAreaView>
+      <PushControler />
     </ScrollView>
   );
 };
