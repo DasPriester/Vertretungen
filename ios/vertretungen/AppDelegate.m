@@ -7,9 +7,9 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <React/RCTPushNotificationManager.h>
 #import "AppDelegate.h"
 
+#import <React/RCTPushNotificationManager.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
