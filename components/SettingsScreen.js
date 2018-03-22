@@ -55,12 +55,36 @@ export default class SettingsScreen extends React.Component {
               alignItems: 'center',
               justifyContent: 'flex-end',
               padding: 20,
-              height: 85,
               width: 340,
               borderRadius: 15,
               backgroundColor: 'rgb(180, 180, 180)',
             }}
           >
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 20,
+                width: 300,
+                marginBottom: 20,
+                borderRadius: 15,
+                backgroundColor: 'white',
+              }}
+            >
+              <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 20, marginBottom: 7 }}>
+                Credits
+              </Text>
+              <Text
+                style={{
+                  color: 'rgb(180, 180, 180)',
+                  fontWeight: 'bold',
+                  fontSize: 18,
+                  textAlign: 'center',
+                }}
+              >
+                -HBG Vertretungsplan- Programming by Philipp Brumm & Michel Rothboeck
+              </Text>
+            </View>
             <Button
               buttonStyle={{
                 backgroundColor: 'rgb(0, 168, 255)',
@@ -71,6 +95,7 @@ export default class SettingsScreen extends React.Component {
                 borderRadius: 15,
               }}
               title="Daten aktualisieren"
+              textStyle={{ fontSize: 20 }}
               onPress={() => reloadData()}
             />
           </View>
