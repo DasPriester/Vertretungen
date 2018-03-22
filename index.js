@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry, Dimensions, View, Text } from 'react-native';
+import { AppRegistry, Dimensions, View, Text, NetInfo, Alert } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 
 import Loading from './components/Loading';
@@ -35,13 +35,22 @@ class AppContainer extends React.Component {
 
   loadData = () => {
     this.setState({ isLoading: true });
-    Promise.all([
-      Storage.get('selectedGrade', DEFAULT_SELECTED_GRADE),
-      gradesFetcher(),
-      substituteFetcher(),
-    ]).then(([selectedGrade, grades, substitutes]) =>
-      this.setState({ isLoading: false, grades, substitutes, selectedGrade })
-    );
+    if (NetInfo.isConnected) {
+      Promise.all([
+        Storage.get('selectedGrade', DEFAULT_SELECTED_GRADE),
+        gradesFetcher(),
+        substituteFetcher(),
+      ]).then(([selectedGrade, grades, substitutes]) =>
+        this.setState({ isLoading: false, grades, substitutes, selectedGrade })
+      );
+    } else {
+      Alert.alert(
+        'Info:',
+        'Keine Internet-Verbindung...',
+        [{ text: 'Erneut versuchen', onPress: () => this.loadData() }],
+        { cancelable: false }
+      );
+    }
     if (this.state.substitutes[this.state.grade] !== SavedSubstitutes[this.state.grade]) {
       SavedSubstitutes = this.state.substitutes;
       sendMessage('Neue Vertretungen für dich!');
