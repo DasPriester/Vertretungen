@@ -90,12 +90,12 @@ export default class HomeScreen extends React.Component {
                 <View style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: 50 }}>
                   <Button
                     buttonStyle={{
-                      backgroundColor: '#456FC6',
+                      backgroundColor: 'rgb(0, 168, 255)',
                       width: 300,
                       height: 45,
                       borderColor: 'transparent',
                       borderWidth: 0,
-                      borderRadius: 5,
+                      borderRadius: 15,
                     }}
                     title="Zurück"
                     onPress={() => setActiveGrade()}

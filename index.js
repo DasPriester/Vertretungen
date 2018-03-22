@@ -26,7 +26,7 @@ class AppContainer extends React.Component {
   };
 
   sendMessage = text => {
-    if (SettingsScreen.state.switch) {
+    if (true) {
       PushNotification.localNotification({
         message: text,
       });

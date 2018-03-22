@@ -12,13 +12,6 @@ const MenuButton = props => (
     </View>
   </TouchableHighlight>
 );
-const ReloadButton = props => (
-  <TouchableHighlight onPress={() => reloadData()} underlayColor="rgb(0, 168, 255)">
-    <View>
-      <Icon name={props.icon} color={props.color} />
-    </View>
-  </TouchableHighlight>
-);
 
 export default ({ navigation, title, hideButtons }) =>
   hideButtons ? (
@@ -43,6 +36,5 @@ export default ({ navigation, title, hideButtons }) =>
         text: title,
         style: { color: 'white', fontSize: 20, fontWeight: 'bold' },
       }}
-      rightComponent={<ReloadButton navigation={navigation} icon="refresh" color="white" />}
     />
   );

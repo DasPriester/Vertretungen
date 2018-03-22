@@ -55,7 +55,7 @@ export default class SettingsScreen extends React.Component {
               alignItems: 'center',
               justifyContent: 'flex-end',
               padding: 20,
-              height: 215,
+              height: 85,
               width: 340,
               borderRadius: 15,
               backgroundColor: 'rgb(180, 180, 180)',
@@ -69,34 +69,9 @@ export default class SettingsScreen extends React.Component {
                 borderColor: 'transparent',
                 borderWidth: 0,
                 borderRadius: 15,
-                marginBottom: 20,
-              }}
-              title="Push-Nachricht"
-              onPress={() => this.sendMessage('Neue Vertretungen für deine Klasse!')}
-            />
-            <Button
-              buttonStyle={{
-                backgroundColor: 'rgb(0, 168, 255)',
-                width: 300,
-                height: 45,
-                borderColor: 'transparent',
-                borderWidth: 0,
-                borderRadius: 15,
-                marginBottom: 20,
               }}
               title="Daten aktualisieren"
               onPress={() => reloadData()}
-            />
-            <Button
-              buttonStyle={{
-                backgroundColor: 'red',
-                width: 300,
-                height: 45,
-                borderColor: 'transparent',
-                borderWidth: 0,
-                borderRadius: 15,
-              }}
-              title="Log Out"
             />
           </View>
         </View>
