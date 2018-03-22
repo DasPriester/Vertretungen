@@ -76,7 +76,7 @@ export default class HomeScreen extends React.Component {
         return subject;
       }
     };
-    TimeLib = [
+    TimeLib1 = [
       [],
       ['8:00', '8:45'],
       ['8:45', '9:30'],
@@ -87,14 +87,37 @@ export default class HomeScreen extends React.Component {
       ['13:15', '14:15'],
       ['14:15', '15:00'],
       ['15:00', '15:45'],
+    ];
+    TimeLib2 = [
+      [],
       ['8:00', '8:45'],
-      ['8:00', '8:45'],
-      ['8:00', '8:45'],
+      ['8:45', '9:30'],
+      ['9:50', '10:35'],
+      ['10:40', '11:25'],
+      ['11:40', '12:25'],
+      ['12:30', '13:15'],
+      ['13:15', '13:45'],
+      ['13:45', '14:30'],
+      ['14:30', '15:15'],
     ];
     formatTime = lesson => {
-      return `${TimeLib[parseInt(lesson.charAt(0))][0]} - ${
-        TimeLib[parseInt(lesson.charAt(lesson.length - 1))][1]
-      }`;
+      if (grade !== 'EF' && grade !== 'Q1' && grade !== 'Q2') {
+        if (lesson != '10|11|12') {
+          return `${TimeLib1[parseInt(lesson.charAt(0))][0]} - ${
+            TimeLib1[parseInt(lesson.charAt(lesson.length - 1))][1]
+          }`;
+        } else {
+          return '15:15 - 17:30';
+        }
+      } else {
+        if (lesson != '10|11|12') {
+          return `${TimeLib2[parseInt(lesson.charAt(0))][0]} - ${
+            TimeLib2[parseInt(lesson.charAt(lesson.length - 1))][1]
+          }`;
+        } else {
+          return '15:15 - 17:30';
+        }
+      }
     };
     return (
       <Fragment>
