@@ -1,14 +1,18 @@
 import React from 'react';
 import { AppRegistry, Dimensions, View, Text } from 'react-native';
+import PushNotification from 'react-native-push-notification';
 
 import Loading from './components/Loading';
 import App from './App';
 import { substituteFetcher, gradesFetcher } from './fetchers';
 import Storage from './packages/react-native-key-value-store';
+import PushController from './components/PushHandler';
 
 const DEFAULT_SELECTED_GRADE = { level: null, index: null };
 const { width, height } = Dimensions.get('screen');
 const getOrientation = (width, height) => (width > height ? 'landscape' : 'portrait');
+
+var SavedSubstitutes = [];
 
 class AppContainer extends React.Component {
   state = {
@@ -21,6 +25,14 @@ class AppContainer extends React.Component {
     height,
   };
 
+  sendMessage = text => {
+    if (SettingsScreen.state.switch) {
+      PushNotification.localNotification({
+        message: text,
+      });
+    }
+  };
+
   loadData = () => {
     this.setState({ isLoading: true });
     Promise.all([
@@ -30,6 +42,10 @@ class AppContainer extends React.Component {
     ]).then(([selectedGrade, grades, substitutes]) =>
       this.setState({ isLoading: false, grades, substitutes, selectedGrade })
     );
+    if (this.state.substitutes[this.state.grade] !== SavedSubstitutes[this.state.grade]) {
+      SavedSubstitutes = this.state.substitutes;
+      sendMessage('Neue Vertretungen für dich!');
+    }
   };
 
   componentWillMount() {

@@ -55,8 +55,8 @@ export default class SettingsScreen extends React.Component {
               borderRadius: 5,
               marginBottom: 20,
             }}
-            title="Message Test"
-            onPress={() => this.sendMessage('test')}
+            title="Push-Nachricht"
+            onPress={() => this.sendMessage('Neue Vertretungen für deine Klasse!')}
           />
           <Button
             buttonStyle={{
