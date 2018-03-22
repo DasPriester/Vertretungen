@@ -15,6 +15,67 @@ export default class HomeScreen extends React.Component {
     } = this.props;
     const { name: grade } = grades[level][index];
     const actualSubstitutes = substitutes[grade];
+    tlib = {
+      M: 'Mathe',
+      D: 'Deutsch',
+      EKbi: 'Erdkunde (Bilingual)',
+      KR: 'Religion (Katholisch)',
+      ER: 'Religion (Evangelisch)',
+      GEbi: 'Geschichte (Bilingual)',
+      PP: 'Philosophie',
+      PL: 'Philosophie',
+      PH: 'Physik',
+      GE: 'Geschichte',
+      KU: 'Kunst',
+      MU: 'Musik',
+      BI: 'Biologie',
+      NW: 'Naturwissenschaften',
+      VF_M: 'Mathe (Vertiefung)',
+      VF_D: 'Deutsch (Vertiefung)',
+      InFö: 'Individuelle Förderung (InFö)',
+      SO: 'Spanisch',
+      EK: 'Erdkunde',
+    };
+    GKLKtranslate = toAnalyse => {
+      switch (toAnalyse) {
+        case 'GK':
+          return 'Grundkurs';
+          break;
+        case 'LK':
+          return 'Leistungskurs';
+          break;
+      }
+    };
+    translate = subject => {
+      if (subject.length >= 3) {
+        if (subject.charAt(subject.length - 3) === '-') {
+          if (tlib[subject.substring(0, subject.length - 3)] !== undefined) {
+            var subject1 = tlib[subject.substring(0, subject.length - 3)];
+          } else {
+            var subject1 = subject.substring(0, subject.length - 3);
+          }
+          var subject2 =
+            '(' + GKLKtranslate(subject.substring(subject.length - 2, subject.length)) + ')';
+          subject = subject1 + ' ' + subject2;
+        }
+        if (subject.charAt(subject.length - 4) === '-') {
+          if (tlib[subject.substring(0, subject.length - 4)] !== undefined) {
+            var subject1 = tlib[subject.substring(0, subject.length - 4)];
+          } else {
+            var subject1 = subject.substring(0, subject.length - 4);
+          }
+          var subject2 =
+            '(' + GKLKtranslate(subject.substring(subject.length - 3, subject.length - 1));
+          var subject3 = subject.substring(subject.length - 1, subject.length);
+          subject = subject1 + ' ' + subject2 + ' - ' + subject3 + ')';
+        }
+      }
+      if (tlib[subject] !== undefined) {
+        return tlib[subject];
+      } else {
+        return subject;
+      }
+    };
     return (
       <Fragment>
         <Header title={`Vertretungen - ${grade}`} navigation={this.props.navigation} />
@@ -47,6 +108,7 @@ export default class HomeScreen extends React.Component {
                 }}
               >
                 {actualSubstitutes.map(({ teacher, lesson, isFree, subject, room }, index) => {
+                  subject = translate(subject);
                   return (
                     <ListItem
                       containerStyle={{
@@ -66,10 +128,14 @@ export default class HomeScreen extends React.Component {
                       }}
                       hideChevron
                       key={index}
-                      title={`${subject} ${room ? `in Raum ${room}` : ''} ${
-                        isFree ? '\t - \tfällt aus' : ''
+                      title={`${subject}${room ? ` in Raum ${room}` : ''}${
+                        isFree ? ' fällt aus' : ''
                       } `}
-                      subtitle={teacher && `bei ${teacher}`}
+                      subtitle={
+                        !isFree
+                          ? teacher ? `wird von ${teacher} vertreten.` : 'wird vertreten.'
+                          : undefined
+                      }
                       badge={{
                         value: lesson,
                         textStyle: { color: isFree ? '#a5d794' : 'white' },
