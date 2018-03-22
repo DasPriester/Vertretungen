@@ -1,0 +1,77 @@
+var express = require('@runkit/runkit/express-endpoint/1.0.0');
+var app = express(exports);
+const request = require('request');
+const cheerio = require('cheerio');
+
+app.get('/', (req, res) => {
+  const data = {};
+
+  request(
+    'http://joomla35.hardtberg-gymnasium.de/neu/index.php/vertretungsplan',
+    (error, response, html) => {
+      const $ = cheerio.load(html);
+      $('h3').each(function(index, element) {
+        let stuff = [];
+        if (element.children[0].data !== undefined) {
+          $('tr', element.next.next).each(function(index2, element2) {
+            if (index2 > 0) {
+              let moreStuff = {};
+              $('td', element2).each(function(index3, element3) {
+                if (index3 < 4) {
+                  if (index3 === 0) {
+                    moreStuff['lesson'] = $(element3).text();
+                  }
+                  if (index3 === 1) {
+                    if (
+                      $(element3)
+                        .text()
+                        .charAt($(element3).text().length - 1) !== '-'
+                    ) {
+                      moreStuff['subject'] = $(element3).text();
+                    } else {
+                      moreStuff['subject'] = $(element3)
+                        .text()
+                        .substring(0, $(element3).text().length - 1);
+                    }
+                  }
+                  if (index3 === 2) {
+                    moreStuff['room'] = $(element3).text();
+                  }
+                  if (index3 === 3) {
+                    if ($(element3).text() === 'Selbstlernphase zu Hause') {
+                      moreStuff['isFree'] = true;
+                      delete moreStuff['room'];
+                    } else {
+                      moreStuff['isFree'] = false;
+                      if ($(element3).text() !== 'n.B.') {
+                        if (
+                          $(element3)
+                            .text()
+                            .charAt($(element3).text().length - 1) !== '.'
+                        ) {
+                          moreStuff['teacher'] = $(element3).text();
+                        } else {
+                          moreStuff['teacher'] = $(element3)
+                            .text()
+                            .substring(0, $(element3).text().length - 4);
+                        }
+                      }
+                    }
+                  }
+                }
+              });
+              stuff.push(moreStuff);
+            }
+          });
+          data[
+            $(element)
+              .text()
+              .slice(-2)
+          ] = stuff;
+        }
+      });
+      console.log(data);
+      res.json(data);
+    }
+  );
+});

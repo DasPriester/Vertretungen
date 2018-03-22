@@ -3,14 +3,17 @@ import { View, TouchableHighlight } from 'react-native';
 import { Icon, Header } from 'react-native-elements';
 
 const MenuButton = props => (
-  <TouchableHighlight onPress={() => props.navigation.navigate('DrawerOpen')}>
+  <TouchableHighlight
+    onPress={() => props.navigation.navigate('DrawerOpen')}
+    underlayColor="rgb(0, 168, 255)"
+  >
     <View>
       <Icon name={props.icon} color={props.color} />
     </View>
   </TouchableHighlight>
 );
 const ReloadButton = props => (
-  <TouchableHighlight onPress={() => reloadData()}>
+  <TouchableHighlight onPress={() => reloadData()} underlayColor="rgb(0, 168, 255)">
     <View>
       <Icon name={props.icon} color={props.color} />
     </View>
@@ -20,22 +23,25 @@ const ReloadButton = props => (
 export default ({ navigation, title, hideButtons }) =>
   hideButtons ? (
     <Header
-      outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
+      outerContainerStyles={{
+        backgroundColor: 'rgb(0, 168, 255)',
+        borderBottomColor: 'rgb(0, 168, 255)',
+      }}
       centerComponent={{
         text: title,
-        style: { color: '#fff' },
+        style: { color: 'white', fontSize: 20, fontWeight: 'bold' },
       }}
     />
   ) : (
     <Header
       outerContainerStyles={{
-        backgroundColor: '#3D6DCC',
-        borderBottomColor: 'rgb(180, 180, 180)',
+        backgroundColor: 'rgb(0, 168, 255)',
+        borderBottomColor: 'rgb(0, 168, 255)',
       }}
       leftComponent={<MenuButton navigation={navigation} icon="menu" color="white" />}
       centerComponent={{
         text: title,
-        style: { color: '#fff' },
+        style: { color: 'white', fontSize: 20, fontWeight: 'bold' },
       }}
       rightComponent={<ReloadButton navigation={navigation} icon="refresh" color="white" />}
     />

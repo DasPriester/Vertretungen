@@ -20,16 +20,16 @@ export default class HomeScreen extends React.Component {
         <Header title={`Vertretungen - ${grade}`} navigation={this.props.navigation} />
         <ScrollView contentContainerStyle={{ flex: 1 }}>
           {actualSubstitutes ? (
-            <List containerStyle={{ marginTop: 0, margin: 0, borderColor: 'rgb(180, 180, 180)' }}>
+            <List containerStyle={{ marginTop: 0, margin: 0, borderColor: 'rgb(232, 109, 27)' }}>
               <ListItem
                 hideChevron
                 title="Heute"
                 rightTitle="Stunde"
-                titleStyle={{ color: 'white' }}
-                rightTitleStyle={{ color: 'white' }}
+                titleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}
+                rightTitleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}
                 containerStyle={{
-                  backgroundColor: 'rgb(180, 180, 180)',
-                  borderBottomColor: 'rgb(180, 180, 180)',
+                  backgroundColor: 'rgb(232, 109, 27)',
+                  borderBottomColor: 'rgb(232, 109, 27)',
                   height: 38,
                 }}
               />
@@ -43,7 +43,7 @@ export default class HomeScreen extends React.Component {
                 containerStyle={{
                   marginTop: 0,
                   marginBottom: 20,
-                  borderColor: 'rgb(180, 180, 180)',
+                  borderColor: 'rgb(232, 109, 27)',
                 }}
               >
                 {actualSubstitutes.map(({ teacher, lesson, isFree, subject, room }, index) => {
@@ -55,6 +55,8 @@ export default class HomeScreen extends React.Component {
                       }}
                       titleStyle={{
                         width: 300,
+                        fontWeight: 'bold',
+                        fontSize: 18,
                       }}
                       subtitleStyle={{
                         width: 300,
@@ -64,13 +66,15 @@ export default class HomeScreen extends React.Component {
                       }}
                       hideChevron
                       key={index}
-                      title={`Fach: ${subject} ${room ? `Raum: ${room}` : ''}`}
-                      subtitle={teacher && `Lehrer: ${teacher}`}
+                      title={`${subject} ${room ? `in Raum ${room}` : ''} ${
+                        isFree ? '\t - \tfällt aus' : ''
+                      } `}
+                      subtitle={teacher && `bei ${teacher}`}
                       badge={{
                         value: lesson,
                         textStyle: { color: isFree ? '#a5d794' : 'white' },
                         containerStyle: {
-                          backgroundColor: isFree ? 'rgb(40, 152, 55)' : 'rgb(180, 180, 180)',
+                          backgroundColor: isFree ? 'rgb(40, 152, 55)' : 'rgb(232, 109, 27)',
                         },
                       }}
                     />

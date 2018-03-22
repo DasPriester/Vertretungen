@@ -27,7 +27,7 @@ export default class SettingsScreen extends React.Component {
       <Fragment>
         <PushController />
         <Header title="Einstellungen" navigation={this.props.navigation} />
-        <View style={{ backgroundColor: 'rgb(180, 180, 180)' }}>
+        <View style={{ backgroundColor: 'rgb(232, 109, 27)' }}>
           <View
             style={{
               alignItems: 'center',
@@ -43,33 +43,62 @@ export default class SettingsScreen extends React.Component {
           </View>
         </View>
         <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 50 }}
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            paddingBottom: 20,
+          }}
         >
-          <Button
-            buttonStyle={{
-              backgroundColor: '#456FC6',
-              width: 300,
-              height: 45,
-              borderColor: 'transparent',
-              borderWidth: 0,
-              borderRadius: 5,
-              marginBottom: 20,
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              padding: 20,
+              height: 215,
+              width: 340,
+              borderRadius: 15,
+              backgroundColor: 'rgb(180, 180, 180)',
             }}
-            title="Push-Nachricht"
-            onPress={() => this.sendMessage('Neue Vertretungen für deine Klasse!')}
-          />
-          <Button
-            buttonStyle={{
-              backgroundColor: '#456FC6',
-              width: 300,
-              height: 45,
-              borderColor: 'transparent',
-              borderWidth: 0,
-              borderRadius: 5,
-            }}
-            title="Daten aktualisieren"
-            onPress={() => reloadData()}
-          />
+          >
+            <Button
+              buttonStyle={{
+                backgroundColor: 'rgb(0, 168, 255)',
+                width: 300,
+                height: 45,
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 15,
+                marginBottom: 20,
+              }}
+              title="Push-Nachricht"
+              onPress={() => this.sendMessage('Neue Vertretungen für deine Klasse!')}
+            />
+            <Button
+              buttonStyle={{
+                backgroundColor: 'rgb(0, 168, 255)',
+                width: 300,
+                height: 45,
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 15,
+                marginBottom: 20,
+              }}
+              title="Daten aktualisieren"
+              onPress={() => reloadData()}
+            />
+            <Button
+              buttonStyle={{
+                backgroundColor: 'red',
+                width: 300,
+                height: 45,
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 15,
+              }}
+              title="Log Out"
+            />
+          </View>
         </View>
       </Fragment>
     );

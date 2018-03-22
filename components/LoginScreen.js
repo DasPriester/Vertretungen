@@ -22,7 +22,7 @@ export default class LoginScreen extends React.Component {
               justifyContent: 'center',
             }}
           >
-            <Text h4 style={{ color: '#3D6DCC', marginBottom: 30 }}>
+            <Text h4 style={{ color: 'rgb(232, 109, 27)', marginBottom: 30 }}>
               Klasse auswählen
             </Text>
             <View style={{ width: width * 0.9 }}>
@@ -32,8 +32,8 @@ export default class LoginScreen extends React.Component {
                   onPress={index => setActiveGrade({ level, index })}
                   key={level}
                   buttons={gradesInLevel.map(({ name }) => name)}
-                  selectedButtonStyle={{ backgroundColor: '#3D6DCC' }}
-                  selectedTextStyle={{ color: 'white' }}
+                  selectedButtonStyle={{ backgroundColor: 'rgb(0, 168, 255)' }}
+                  selectedTextStyle={{ color: 'rgb(232, 109, 27)' }}
                 />
               ))}
             </View>
