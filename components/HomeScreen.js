@@ -129,8 +129,8 @@ export default class HomeScreen extends React.Component {
                 hideChevron
                 title="Heute"
                 rightTitle="Stunde"
-                titleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}
-                rightTitleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}
+                titleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}
+                rightTitleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}
                 containerStyle={{
                   backgroundColor: 'rgb(232, 109, 27)',
                   borderBottomColor: 'rgb(232, 109, 27)',
@@ -161,7 +161,7 @@ export default class HomeScreen extends React.Component {
                       titleStyle={{
                         width: 300,
                         fontWeight: 'bold',
-                        fontSize: 18,
+                        fontSize: 14,
                       }}
                       subtitleStyle={{
                         width: 300,
