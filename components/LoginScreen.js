@@ -22,20 +22,55 @@ export default class LoginScreen extends React.Component {
               justifyContent: 'center',
             }}
           >
-            <Text h4 style={{ color: 'rgb(232, 109, 27)', marginBottom: 30 }}>
-              Klasse auswählen
-            </Text>
-            <View style={{ width: width * 0.9 }}>
-              {Object.entries(grades).map(([level, gradesInLevel]) => (
-                <ButtonGroup
-                  selectedIndex={level === selectedGrade.level ? selectedGrade.index : undefined}
-                  onPress={index => setActiveGrade({ level, index })}
-                  key={level}
-                  buttons={gradesInLevel.map(({ name }) => name)}
-                  selectedButtonStyle={{ backgroundColor: 'rgb(0, 168, 255)' }}
-                  selectedTextStyle={{ color: 'rgb(232, 109, 27)' }}
-                />
-              ))}
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingLeft: 20,
+                paddingRight: 20,
+                paddingBottom: 7,
+                paddingTop: 5,
+                marginLeft: 20,
+                marginRight: 20,
+                marginBottom: 20,
+                borderRadius: 15,
+                backgroundColor: 'rgb(232, 109, 27)',
+              }}
+            >
+              <Text h4 style={{ color: 'white' }}>
+                Klasse auswählen
+              </Text>
+            </View>
+            <View
+              style={{
+                alignItems: 'center',
+                padding: 20,
+                marginLeft: 20,
+                marginRight: 20,
+                borderRadius: 15,
+                backgroundColor: 'rgb(180, 180, 180)',
+              }}
+            >
+              <View style={{ width: width - 100 }}>
+                {Object.entries(grades).map(([level, gradesInLevel]) => (
+                  <ButtonGroup
+                    selectedIndex={level === selectedGrade.level ? selectedGrade.index : undefined}
+                    onPress={index => setActiveGrade({ level, index })}
+                    key={level}
+                    buttons={gradesInLevel.map(({ name }) => name)}
+                    selectedButtonStyle={{ backgroundColor: 'rgb(0, 168, 255)' }}
+                    selectedTextStyle={{ color: 'rgb(232, 109, 27)' }}
+                    containerBorderRadius={0}
+                    textStyle={{ color: 'white', fontWeight: 'bold' }}
+                    containerStyle={{
+                      backgroundColor: 'rgb(0, 168, 255)',
+                      borderRadius: 10,
+                      borderColor: 'transparent',
+                    }}
+                    innerBorderStyle={{ color: 'white' }}
+                  />
+                ))}
+              </View>
             </View>
           </View>
         </View>
