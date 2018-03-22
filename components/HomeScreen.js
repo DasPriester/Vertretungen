@@ -76,6 +76,26 @@ export default class HomeScreen extends React.Component {
         return subject;
       }
     };
+    TimeLib = [
+      [],
+      ['8:00', '8:45'],
+      ['8:45', '9:30'],
+      ['9:50', '10:35'],
+      ['10:40', '11:25'],
+      ['11:40', '12:25'],
+      ['12:30', '13:15'],
+      ['13:15', '14:15'],
+      ['14:15', '15:00'],
+      ['15:00', '15:45'],
+      ['8:00', '8:45'],
+      ['8:00', '8:45'],
+      ['8:00', '8:45'],
+    ];
+    formatTime = lesson => {
+      return `${TimeLib[parseInt(lesson.charAt(0))][0]} - ${
+        TimeLib[parseInt(lesson.charAt(lesson.length - 1))][1]
+      }`;
+    };
     return (
       <Fragment>
         <Header title={`Vertretungen - ${grade}`} navigation={this.props.navigation} />
@@ -122,9 +142,12 @@ export default class HomeScreen extends React.Component {
                       }}
                       subtitleStyle={{
                         width: 300,
+                        color: isFree && 'rgb(40, 152, 55)',
                       }}
                       rightTitleStyle={{
                         color: isFree ? '#3e702d' : '#bbb',
+                        fontSize: 20,
+                        fontWeight: 'bold',
                       }}
                       hideChevron
                       key={index}
@@ -134,7 +157,7 @@ export default class HomeScreen extends React.Component {
                       subtitle={
                         !isFree
                           ? teacher ? `wird von ${teacher} vertreten.` : 'wird vertreten.'
-                          : undefined
+                          : formatTime(lesson)
                       }
                       badge={{
                         value: lesson,
