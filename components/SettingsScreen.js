@@ -34,7 +34,7 @@ export default class SettingsScreen extends React.Component {
           >
             <Text style={{ fontSize: 20, color: 'white' }}>Push-Nachrichten</Text>
             <View style={{ flex: 1, alignItems: 'flex-end' }}>
-              <Switch onValueChange={this.switch} value={state} />
+              {/* <Switch onValueChange={this.switch} value={state} /> */}
             </View>
           </View>
         </View>{' '}
