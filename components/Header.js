@@ -4,6 +4,7 @@ import { Icon, Header } from 'react-native-elements';
 
 const MenuButton = props => (
   <TouchableHighlight
+    style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}
     onPress={() => props.navigation.navigate('DrawerOpen')}
     underlayColor="rgb(0, 168, 255)"
   >
