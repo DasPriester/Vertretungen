@@ -37,8 +37,7 @@ export default class SettingsScreen extends React.Component {
               {/* <Switch onValueChange={this.switch} value={state} /> */}
             </View>
           </View>
-        </View>{' '}
-        */}
+        </View>
         <View
           style={{
             flex: 1,
@@ -90,6 +89,7 @@ export default class SettingsScreen extends React.Component {
                 borderColor: 'transparent',
                 borderWidth: 0,
                 borderRadius: 15,
+                marginBottom: 10,
               }}
               textStyle={{ fontSize: 20 }}
               title="Daten aktualisieren"

@@ -181,7 +181,7 @@ export default class HomeScreen extends React.Component {
                       }}
                       subtitleStyle={{
                         width: 300,
-                        color: isFree && 'rgb(40, 152, 55)',
+                        color: isFree ? '#289837' : '#bbb',
                       }}
                       rightTitleStyle={{
                         color: isFree ? '#3e702d' : '#bbb',
