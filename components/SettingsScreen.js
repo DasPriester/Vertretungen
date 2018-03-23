@@ -18,7 +18,7 @@ export default class SettingsScreen extends React.Component {
   };
 
   render() {
-    const { screenProps: { reloadData } } = this.props;
+    const { screenProps: { reloadData, setActiveGrade } } = this.props;
     return (
       <Fragment>
         <PushController />
@@ -91,9 +91,21 @@ export default class SettingsScreen extends React.Component {
                 borderWidth: 0,
                 borderRadius: 15,
               }}
-              title="Daten aktualisieren"
               textStyle={{ fontSize: 20 }}
-              onPress={() => reloadData()}
+              title="Daten aktualisieren"
+              onPress={reloadData}
+            />
+            <Button
+              onPress={setActiveGrade}
+              buttonStyle={{
+                backgroundColor: 'red',
+                width: 300,
+                height: 45,
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 15,
+              }}
+              title="Log Out"
             />
           </View>
         </View>
