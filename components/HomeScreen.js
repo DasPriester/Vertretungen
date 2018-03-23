@@ -151,7 +151,6 @@ export default class HomeScreen extends React.Component {
                 containerStyle={{
                   backgroundColor: 'rgb(232, 109, 27)',
                   borderBottomColor: 'rgb(232, 109, 27)',
-                  height: 38,
                 }}
               />
             </List>
