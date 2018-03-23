@@ -12,7 +12,7 @@ const DEFAULT_SELECTED_GRADE = { level: null, index: null };
 const { width, height } = Dimensions.get('screen');
 const getOrientation = (width, height) => (width > height ? 'landscape' : 'portrait');
 
-var SavedSubstitutes = {};
+var savedSubstitutes = {};
 
 class AppContainer extends React.Component {
   state = {
@@ -34,7 +34,9 @@ class AppContainer extends React.Component {
   };
 
   loadData = () => {
+    const { selectedGrade, substitutes } = this.state;
     this.setState({ isLoading: true });
+
     if (NetInfo.isConnected) {
       Promise.all([
         Storage.get('selectedGrade', DEFAULT_SELECTED_GRADE),
@@ -47,13 +49,14 @@ class AppContainer extends React.Component {
       Alert.alert(
         'Info:',
         'Keine Internet-Verbindung...',
-        [{ text: 'Erneut versuchen', onPress: () => this.loadData() }],
+        [{ text: 'Erneut versuchen', onPress: this.loadData }],
         { cancelable: false }
       );
     }
-    const grade = this.state.selectedGrade['level'] + this.state.selectedGrade['index'];
-    if (this.state.substitutes[grade] !== SavedSubstitutes[grade]) {
-      SavedSubstitutes = this.state.substitutes;
+
+    const grade = selectedGrade.level + selectedGrade.index;
+    if (substitutes[grade] !== savedSubstitutes[grade]) {
+      savedSubstitutes = substitutes;
       this.sendMessage('Neue Vertretungen für dich!');
     }
   };
