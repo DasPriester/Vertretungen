@@ -18,12 +18,12 @@ export default class SettingsScreen extends React.Component {
   };
 
   render() {
-    const { screenProps: { reloadData } } = this.props;
+    const { screenProps: { reloadData, setActiveGrade } } = this.props;
     return (
       <Fragment>
         <PushController />
-        <Header title="Einstellungen" navigation={this.props.navigation} />
-        {/* <View style={{ backgroundColor: 'rgb(232, 109, 27)' }}>
+        <Header title="Einstellungen" navigation={this.props.navigation} reloadData={reloadData} />
+        <View style={{ backgroundColor: 'rgb(232, 109, 27)' }}>
           <View
             style={{
               alignItems: 'center',
@@ -34,13 +34,11 @@ export default class SettingsScreen extends React.Component {
           >
             <Text style={{ fontSize: 20, color: 'white' }}>Push-Nachrichten</Text>
             <View style={{ flex: 1, alignItems: 'flex-end' }}>
-              <Switch
-                onValueChange={this.switch}
-                value={state}
-              />
+              <Switch onValueChange={this.switch} value={state} />
             </View>
           </View>
-        </View> */}
+        </View>{' '}
+        */}
         <View
           style={{
             flex: 1,
@@ -93,9 +91,21 @@ export default class SettingsScreen extends React.Component {
                 borderWidth: 0,
                 borderRadius: 15,
               }}
-              title="Daten aktualisieren"
               textStyle={{ fontSize: 20 }}
-              onPress={() => reloadData()}
+              title="Daten aktualisieren"
+              onPress={reloadData}
+            />
+            <Button
+              onPress={setActiveGrade}
+              buttonStyle={{
+                backgroundColor: 'red',
+                width: 300,
+                height: 45,
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 15,
+              }}
+              title="Log Out"
             />
           </View>
         </View>

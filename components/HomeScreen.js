@@ -11,7 +11,13 @@ export default class HomeScreen extends React.Component {
 
   render() {
     const {
-      screenProps: { grades, selectedGrade: { level, index }, substitutes, setActiveGrade },
+      screenProps: {
+        grades,
+        selectedGrade: { level, index },
+        substitutes,
+        setActiveGrade,
+        reloadData,
+      },
     } = this.props;
     const { name: grade } = grades[level][index];
     const actualSubstitutes = substitutes[grade];
@@ -128,7 +134,11 @@ export default class HomeScreen extends React.Component {
     };
     return (
       <Fragment>
-        <Header title={`Vertretungen - ${grade}`} navigation={this.props.navigation} />
+        <Header
+          title={`Vertretungen - ${grade}`}
+          navigation={this.props.navigation}
+          reloadData={reloadData}
+        />
         <ScrollView contentContainerStyle={{ flex: 1 }}>
           {actualSubstitutes ? (
             <List containerStyle={{ marginTop: 0, margin: 0, borderColor: 'rgb(232, 109, 27)' }}>
@@ -141,7 +151,6 @@ export default class HomeScreen extends React.Component {
                 containerStyle={{
                   backgroundColor: 'rgb(232, 109, 27)',
                   borderBottomColor: 'rgb(232, 109, 27)',
-                  height: 38,
                 }}
               />
             </List>
