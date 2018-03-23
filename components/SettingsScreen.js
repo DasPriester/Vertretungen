@@ -22,8 +22,8 @@ export default class SettingsScreen extends React.Component {
     return (
       <Fragment>
         <PushController />
-        <Header title="Einstellungen" navigation={this.props.navigation} />
-        {/* <View style={{ backgroundColor: 'rgb(232, 109, 27)' }}>
+        <Header title="Einstellungen" navigation={this.props.navigation} reloadData={reloadData} />
+        <View style={{ backgroundColor: 'rgb(232, 109, 27)' }}>
           <View
             style={{
               alignItems: 'center',
@@ -34,13 +34,11 @@ export default class SettingsScreen extends React.Component {
           >
             <Text style={{ fontSize: 20, color: 'white' }}>Push-Nachrichten</Text>
             <View style={{ flex: 1, alignItems: 'flex-end' }}>
-              <Switch
-                onValueChange={this.switch}
-                value={state}
-              />
+              <Switch onValueChange={this.switch} value={state} />
             </View>
           </View>
-        </View> */}
+        </View>{' '}
+        */}
         <View
           style={{
             flex: 1,
