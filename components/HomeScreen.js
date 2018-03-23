@@ -18,6 +18,12 @@ export default class HomeScreen extends React.Component {
     tlib = {
       M: 'Mathe',
       D: 'Deutsch',
+      E: 'Englisch',
+      F: 'Französisch',
+      IF: 'Informatik',
+      L: 'Latein',
+      SW: 'Sozialwissenschaften',
+      SP: 'Sport',
       EKbi: 'Erdkunde (Bilingual)',
       KR: 'Religion (Katholisch)',
       ER: 'Religion (Evangelisch)',
@@ -32,8 +38,9 @@ export default class HomeScreen extends React.Component {
       NW: 'Naturwissenschaften',
       VF_M: 'Mathe (Vertiefung)',
       VF_D: 'Deutsch (Vertiefung)',
+      VF_E: 'Englisch (Vertiefung)',
       InFö: 'Individuelle Förderung (InFö)',
-      SO: 'Spanisch',
+      S0: 'Spanisch',
       EK: 'Erdkunde',
     };
     GKLKtranslate = toAnalyse => {
