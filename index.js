@@ -12,7 +12,7 @@ const DEFAULT_SELECTED_GRADE = { level: null, index: null };
 const { width, height } = Dimensions.get('screen');
 const getOrientation = (width, height) => (width > height ? 'landscape' : 'portrait');
 
-var SavedSubstitutes = [];
+var SavedSubstitutes = {};
 
 class AppContainer extends React.Component {
   state = {
@@ -51,9 +51,10 @@ class AppContainer extends React.Component {
         { cancelable: false }
       );
     }
-    if (this.state.substitutes[this.state.grade] !== SavedSubstitutes[this.state.grade]) {
+    const grade = this.state.selectedGrade['level'] + this.state.selectedGrade['index'];
+    if (this.state.substitutes[grade] !== SavedSubstitutes[grade]) {
       SavedSubstitutes = this.state.substitutes;
-      sendMessage('Neue Vertretungen für dich!');
+      this.sendMessage('Neue Vertretungen für dich!');
     }
   };
 
